@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link href="{% static 'css/chatbot.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="chat-container">
+    <div class="card flex-grow-1">
+      <div class="card-header bg-primary text-white">PyIA</div>
+      <div class="card-header bg-primary text-white"><b>Bem-vindo ao PyIA</b></div>
+      <div class="card-body messages-box">
+
+        <ul class="list-unstyled messages-list">
+
+          {% for chat in chats %}
+            <li class="message sent">
+              <div class="message-text">
+                <div class="message-sender">
+                  <b>Você</b>
+                </div>
+                <div class="message-content">
+                  {{chat.message}}
+                </div>
+              </div>
+            </li>
+
+            <li class="message received">
+              <div class="message-text">
+                <div class="message-sender">
+                  <b>AI Chatbot</b>
+                </div>
+                <div class="markdown-content">
+                  {{chat.response|safe}}
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+
+        </ul>
+
+      </div>
+      <br><br>
+      <br><br>
+      <br><br>
+    </div>
+    <form class="message-form">
+      {%csrf_token%}
+      <div class="input-group">
+        <input type="text" class="form-control message-input" placeholder="No que posso ajudar?">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary btn-send">Enviar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<script src="{% static 'js/chatBot.js' %}"></script>
+{% endblock %}

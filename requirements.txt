@@ -1,0 +1,10 @@
+Django==5.1.3
+django-import-export==4.2.0
+django-jazzmin @ git+https://github.com/thercior/django-jazzmin.git@15200d96ba7f6177bcf6c3ec4d09e43ed6ca0325
+django-widget-tweaks==1.5.0
+langchain-groq==0.2.1
+Markdown==3.7
+psycopg==3.2.3
+psycopg-binary==3.2.3
+python-dotenv==1.0.1
+requests==2.32.3
