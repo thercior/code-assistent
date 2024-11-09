@@ -1,53 +1,63 @@
-const messagesList = document.querySelector('.messages-list');
-const messageForm = document.querySelector('.message-form');
-const messageInput = document.querySelector('.message-input');
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        scroollBotom();
+    }, 1000)
+})
 
-messageForm.addEventListener('submit', (event) => {
+const messagesList = document.getElementById('messagesList');
+const messageForm = document.getElementById('messageForm');
+const messageInput = document.getElementById('messageInput');
+
+messageForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const message = messageInput.value.trim();
-    if (message.length === 0) {
-        return;
-    }
+    if (!message) return;
 
-    const messageItem = document.createElement('li');
-    messageItem.classList.add('message', 'sent');
-    messageItem.innerHTML = `
-        <div class="message-text">
-            <div class="message-sender">
-                <b>Você</b>
-            </div>
-            <div class="message-content">
-                ${message}
-            </div>
-        </div>`;
-    messagesList.appendChild(messageItem);
+    // Add user message
+    addMessageToChat(message, 'Você', 'end');
 
     messageInput.value = '';
 
-    fetch('', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-        'message': message
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        const response = data.response;
-        const messageItem = document.createElement('li');
-        messageItem.classList.add('message', 'received');
-        messageItem.innerHTML = `
-        <div class="message-text">
-            <div class="message-sender">
-                <b>AI Chatbot</b>
-            </div>
+    try {
+        const response = await fetch('', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                'csrfmiddlewaretoken': document.querySelector('[name="csrfmiddlewaretoken"]').value,
+                'message': message
+            })
+        });
+    
+        const data = await response.json();
+        addMessageToChat(data.response, 'Ai Chatbot', 'start');
+    } catch (error) {
+        console.error('Erro ao enviar a mensagem: ', error);
+    }
+    
+});
+
+function scroollBotom() {
+    // messagesList.scrollTop = messagesList.scrollHeight;
+    messagesList.scrollTo({
+        top: messagesList.scrollHeight,
+        behavior: 'smooth'
+    });
+}
+
+function addMessageToChat(content, sender, align) {
+    const messageItem = document.createElement('div');
+    messageItem.classList.add('flex', align === 'end' ? 'justify-end' : 'justify-start');
+
+    messageItem.innerHTML = `
+        <div class="bg-${align === 'end' ? 'blue-300' : 'gray-900'} bg-${align === 'end' ? 'opacity-100' : 'opacity-50'} text-${align === 'end' ? 'gray-800' : 'gray-400'} p-3 rounded-lg w-auto max-w-screen-md text-justify shadow-sm">
+            <div><strong>${sender}</strong></div>
             <div class="markdown-content">
-                ${response}
+                ${content}
             </div>
         </div>
-        `;
-        messagesList.appendChild(messageItem);
-    });
-});
+    `;
+
+    messagesList.appendChild(messageItem);
+   scroollBotom();  // Scroll to the latest message
+}

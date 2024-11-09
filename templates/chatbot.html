@@ -2,59 +2,44 @@
 {% load static %}
 
 {% block styles %}
-  <link href="{% static 'css/chatbot.css' %}" rel="stylesheet">
+    <link href="{% static 'css/chatbot.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-  <div class="chat-container">
-    <div class="card flex-grow-1">
-      <div class="card-header bg-primary text-white">PyIA</div>
-      <div class="card-header bg-primary text-white"><b>Bem-vindo ao PyIA</b></div>
-      <div class="card-body messages-box">
-
-        <ul class="list-unstyled messages-list">
-
-          {% for chat in chats %}
-            <li class="message sent">
-              <div class="message-text">
-                <div class="message-sender">
-                  <b>Você</b>
-                </div>
-                <div class="message-content">
-                  {{chat.message}}
-                </div>
-              </div>
-            </li>
-
-            <li class="message received">
-              <div class="message-text">
-                <div class="message-sender">
-                  <b>AI Chatbot</b>
-                </div>
-                <div class="markdown-content">
-                  {{chat.response|safe}}
-                </div>
-              </div>
-            </li>
-          {% endfor %}
-
-        </ul>
-
-      </div>
-      <br><br>
-      <br><br>
-      <br><br>
-    </div>
-    <form class="message-form">
-      {%csrf_token%}
-      <div class="input-group">
-        <input type="text" class="form-control message-input" placeholder="No que posso ajudar?">
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-primary btn-send">Enviar</button>
+    <div class="chat-container w-4/5 sm:w-full lg:w-4/5">
+            <!-- Header -->
+        <div class="bg-blue-500 p-4 text-white text-center font-semibold">
+            Code Assistant
         </div>
-      </div>
-    </form>
-  </div>
+    
+        <div class="flex-1 overflow-y-auto p-4 space-y-4" id="messagesList">
+            {% for chat in chats %}
+                <!-- User Message -->
+                <div class="flex justify-end">
+                    <div class="bg-blue-300 text-gray-800 p-3 rounded-lg w-auto max-w-screen-md text-justify shadow-sm">
+                        <div><strong>Você</strong></div>
+                        <div class="markdown-content">{{ chat.message }}</div>
+                    </div>
+                </div>
+
+                <!-- AI Response -->
+                <div class="flex justify-start">
+                    <div class="bg-gray-900 bg-opacity-50 text-gray-400 p-3 rounded-lg w-auto max-w-screen-md text-justify shadow-sm">
+                        <div class="text-gray-100"><strong>Code Assistant</strong></div>
+                        <div class="markdown-content">{{ chat.response|safe }}</div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <!-- Message Input -->
+        <form action="" id="messageForm" class="p-4 bg-gray-600 flex space-x-2 border-t border-gray-300">
+            {% csrf_token %}
+            <input type="text" id="messageInput" class="flex-1 bg-gray-600 text-white p-2 border rounded-lg focus:outline-none" placeholder="Digite sua mensagem...">
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Enviar</button>
+        </form>
+    </div>
 
 <script src="{% static 'js/chatBot.js' %}"></script>
 {% endblock %}
