@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Chats - {{ request.user.username }}{% endblock title %}
+
+
+{% block content %}
+    <div class="grid grid-rows-2">
+    
+        <!-- Texto de Introdução -->
+        <div class="grid grid-rows-1">
+            <p class="text-center text-gray-400 mt-6">Aqui estão suas conversas:</p>
+            <!-- Botão para Nova Conversa -->
+            <form method="post" action="{% url 'Chatbot:new_conversation' %}" class="mt-6">
+                {% csrf_token %}
+                <button type="submit" class="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-600 transition">
+                    Iniciar Nova Conversa
+                </button>
+            </form>
+        </div>
+        
+        <!-- Container de Conversas -->
+        <div class="grid grid-rows-* grid-flow-col flex flex-col items-center space-y-4 mt-4">
+            <!-- Lista de Conversas -->
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl">
+                {% for conversation in conversations %}
+                    <a href="{% url 'Chatbot:chat_view' conversation.id %}" class="group block p-4 bg-gray-800 rounded-lg shadow-lg transition transform hover:-translate-y-1">
+                        <div class="p-5 rounded-lg shadow-md transition duration-200 ease-in-out hover:shadow-lg hover:shadow-blue-500/50 bg-gray-800">
+                            <h3 class="text-lg font-semibold text-white group-hover:text-blue-400">{{ conversation.title|safe }}</h3>
+                            <p class="text-gray-400 text-sm">Criado em {{ conversation.created_at|date:"d/m/Y H:i" }}</p>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="text-gray-400">Nenhuma conversa encontrada. Inicie uma nova abaixo.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+{% endblock content %}

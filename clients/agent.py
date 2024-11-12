@@ -32,3 +32,8 @@ class CodeAssistantAI:
         response = self.__model.invoke(messages)
 
         return markdown(response.content, output_format='html')
+
+    def summarize_title(self, initial_message):
+        prompt = f"Resuma esta mensagem em um título curto: '{initial_message}'"
+        response = self.ask_ai(context="", message=prompt)
+        return response.strip()
