@@ -34,7 +34,7 @@ DEBUG_DEV = os.getenv('DEBUG_DEV')
 DEBUG_PROD = os.getenv('DEBUG_PRODUCTION')
 DEBUG = DEBUG_DEV if DEBUG_DEV else DEBUG_PROD
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'import_export',
     'widget_tweaks',
     'chatbot',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -169,3 +170,6 @@ MESSAGE_TAGS = {
 
 # Variables extras imported
 GROQ_API_KEY = os.getenv('GROQ_API_KEY')
+
+LOGIN_REDIRECT_URL = 'Chatbot:conversation_list'
+LOGOUT_REDIRECT_URL = 'Accounts:login'
