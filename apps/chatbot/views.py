@@ -38,7 +38,8 @@ class ChatBotView(LoginRequiredMixin, View):
             'Chatbot/chatbot.html',
             {
                 'chats': chats,
-                'conversation_id': conversation,
+                'conversation': conversation,
+                'conversation_selected': conversation_id,
                 'conversations': conversations
             }
         )
