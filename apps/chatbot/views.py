@@ -30,9 +30,18 @@ class ChatBotView(LoginRequiredMixin, View):
         self.code_assistant = CodeAssistantAI()
 
     def get(self, request, conversation_id, *args, **kwargs):
+        conversations = request.user.conversations_chat.all()
         conversation = get_object_or_404(ConversationChat, id=conversation_id, user=request.user)
         chats = conversation.chats.all()
-        return render(request, 'Chatbot/chatbot.html', {'chats': chats, 'conversation': conversation})
+        return render(
+            request,
+            'Chatbot/chatbot.html',
+            {
+                'chats': chats,
+                'conversation_id': conversation,
+                'conversations': conversations
+            }
+        )
 
     def post(self, request, conversation_id, *args, **kwargs):
         conversation = get_object_or_404(ConversationChat, id=conversation_id, user=request.user)

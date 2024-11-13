@@ -9,15 +9,25 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         {% block styles %}{% endblock %}
     </head>
-    <body class="bg-gray-700 h-screen">
-        {% include "components/_header.html" %}
-        <main class="flex-grow container mx-auto py-6 px-4">
-            {% block content %}
+    <body class="bg-gray-700 h-screen flex overflow-hidden">
+        {% if user.is_authenticated %}
+            {% include "components/_sidebar.html" %}
+        {% endif %}
         
-            {% endblock %}
-        </main>
+        <div class="flex-grow">
+            {% include "components/_header.html" %}
+            
+            <main class="container mx-auto py-6 px-4">
+                {% block content %}
+            
+                {% endblock %}
+            </main>
 
+        </div>
         
-        {% block scripts %}{% endblock scripts %}
+        
+        {% block scripts %}
+            <script src="{% static 'js/toggleSidebar.js' %}"></script>
+        {% endblock scripts %}
     </body>
 </html>

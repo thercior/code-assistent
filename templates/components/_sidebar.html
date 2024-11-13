@@ -1,0 +1,29 @@
+<div id="sidebar" class="sidebar bg-gray-800 text-white w-64 transition-transform transform -translate-x-full lg:translate-x-0 lg:flex-shrink-0 h-full flex flex-col">
+    <button id="toggleSidebar" class="p-2 text-gray-200 bg-gray-700 focus:outline-none lg:hidden">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+        </svg>
+    </button>
+
+    <div class="conversations mt-4 overflow-y-auto">
+        <h3 class="p-2 font-bold ">
+            {{ request.user.first_name }} {{ request.user.last_name }}
+        </h3>
+        <div class="mt-12">
+            <h3 class="text-lg font-semibold text-start">
+                <ul>
+                    {% for conversation in conversations %}
+                        <li class="conversation-item {% if conversation.id == conversation_id %} bg-gray-600 {% else %} hover:bg-gray-700 {% endif %} p-4 cursor-pointer transition">
+                            <a href="{% url 'Chatbot:chat_view' conversation.id %}" class="flex justify-start">
+                                <div class="text-sm font-medium">
+                                    {{ conversation.title|safe }}
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                    
+                </ul>
+            </h3>
+        </div>
+    </div>
+</div>
