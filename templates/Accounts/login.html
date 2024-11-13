@@ -23,10 +23,11 @@
                 </div>
 
                 <button type="submit" class="w-full py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md hover:shadow-lg transition">Entrar</button>
-                <p class="text-center text-gray-400 mt-4">Não tem uma conta? 
-                    <a href="" class="text-blue-400 hover:underline">Cadastre-se</a>
-                </p>
+                
             </form>
+            <p class="text-center text-gray-400 mt-4">Não tem uma conta? 
+                <a href="{% url 'Accounts:register' %}" class="text-blue-400 hover:underline">Cadastre-se</a>
+            </p>
         </div>
     </div>
 
