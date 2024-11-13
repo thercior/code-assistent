@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastro de Usuário{% endblock title %}
+
+
+{% block content %}
+    <div class="flex flex-col justify-center items-center mx-auto w-full max-w-md p-6 bg-gray-800 rounded-lg shadow-lg transform transition hover:scale-105 hover:shadow-green-500/80">
+        <h2 class="text-center text-2xl font-bold text-white mb-6">
+            Cadastro de usuário
+        </h2>
+
+        <form action="{% url 'Accounts:register' %}" method="post">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-300">Nome de Usuário</label>
+                <input type="text" id="id_username" name="username" required class="w-full px-4 py-2 mt-2 text-gray-900 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+
+            <div class="mb-4">
+                <label for="first_name" class="block text-sm font-medium text-gray-300">Nome</label>
+                <input type="text" id="id_first_name" name="first_name" required class="w-full px-4 py-2 mt-2 text-gray-900 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+
+            <div class="mb-4">
+                <label for="last_name" class="block text-sm font-medium text-gray-300">Sobrenome</label>
+                <input type="text" id="id_last_name" name="first_name" required class="w-full px-4 py-2 mt-2 text-gray-900 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+    
+            <!-- Campo de Email -->
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                <input type="email" id="id_email" name="email" required class="w-full px-4 py-2 mt-2 text-gray-900 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+    
+            <!-- Campo de Senha -->
+            <div class="mb-4">
+                <label for="password1" class="block text-sm font-medium text-gray-300">Senha</label>
+                <input type="password" id="id_password1" name="password1" required class="w-full px-4 py-2 mt-2 text-gray-900 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+    
+            <!-- Campo de Confirmação de Senha -->
+            <div class="mb-6">
+                <label for="password2" class="block text-sm font-medium text-gray-300">Confirme a Senha</label>
+                <input type="password" id="id_password2" name="password2" required class="w-full px-4 py-2 mt-2 text-gray-900 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+    
+            <!-- Botão de Cadastro -->
+            <button type="submit" class="w-full py-2 text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md hover:shadow-lg transition">Cadastrar</button>
+    
+            <!-- Link para Login -->
+            <p class="text-center text-gray-400 mt-4">Já tem uma conta? <a href="{% url 'Accounts:login' %}" class="text-green-400 hover:underline">Faça login</a></p>
+
+        </form>
+    </div>
+{% endblock content %}
