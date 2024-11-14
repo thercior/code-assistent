@@ -10,6 +10,7 @@
             Cadastro de usuário
         </h2>
 
+        {% include "components/_errors.html" %}
         <form action="{% url 'Accounts:register' %}" method="post">
             {% csrf_token %}
 
