@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleSidebar.addEventListener("click", () => {
         console.log("Botão clicado");
         sidebar.classList.toggle("-translate-x-full");
-        toggleSidebar.classList.toggle("bg-gray-800");
         mainContent.classList.toggle("-ml-52");
         console.log("Classes da sidebar:", sidebar.classList);
     });

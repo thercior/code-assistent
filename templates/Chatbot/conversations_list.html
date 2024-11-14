@@ -23,7 +23,7 @@
             {% for conversation in conversations %}
                 <a href="{% url 'Chatbot:chat_view' conversation.id %}" class="group flex-grow sm:flex-grow-0 md-flex-grow-0 w-full sm:w-auto p-2">
                     <div class="w-60 min-h-[150px] h-[150px] max-w-xs p-4 bg-gray-800 rounded-lg shadow-lg transition transform hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/50 flex flex-col justify-between">
-                        <h3 class="text-lg font-semibold text-white group-hover:text-blue-400">{{ conversation.title|safe }}</h3>
+                        <h3 class="text-lg text-justify font-semibold text-white group-hover:text-blue-400">{{ conversation.title|safe }}</h3>
                         <p class="text-gray-400 text-sm">Criado em {{ conversation.created_at|date:"d/m/Y H:i"}}</p>
                     </div>
                 </a>
