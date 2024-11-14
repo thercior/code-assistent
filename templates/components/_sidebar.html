@@ -10,10 +10,15 @@
         <div class="conversations mt-4 overflow-y-auto">
             <h3 class="p-2 font-bold ">
                 <a href="{% url 'Accounts:update_profile' request.user.id %}" class="">
+                    <i class="fa fa-user ml-2"></i>
                     {{ request.user.first_name }} {{ request.user.last_name }}
                 </a>
             </h3>
-            <div class="mt-12">
+            <hr>
+            <div class="mt-4">
+                <h2 class="text-xl font-semibold text-justify ml-2">
+                    Aqui estão seus chats:
+                </h2>
                 <h3 class="text-lg font-semibold text-start">
                     <ul>
                         {% for conversation in conversations %}
