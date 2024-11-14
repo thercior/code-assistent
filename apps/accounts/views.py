@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from accounts.forms import CustomUserCreationForm, UserProfileForm
+from chatbot.models import ConversationChat
 
 
 
@@ -34,3 +35,9 @@ class UpdateRegisterView(LoginRequiredMixin, UpdateView):
     form_class = UserProfileForm
     template_name = 'Accounts/edit_profile.html'
     success_url = reverse_lazy('Chatbot:conversation_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['conversations'] = self.request.user.conversations_chat.all()
+        return context
