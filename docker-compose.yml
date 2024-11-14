@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  chatbot:
+    buid: .
+    container_name: chatbot
+    ports:
+      - "8051:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=code-assistent.settings
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+
+volumes:
+  static_volume:
+  media_volume:
