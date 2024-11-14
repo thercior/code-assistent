@@ -2,7 +2,7 @@ version: '3'
 
 services:
   code_assistent:
-    buid: .
+    build: .
     container_name: code_assistent
     ports:
       - "8051:8000"
