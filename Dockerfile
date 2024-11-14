@@ -5,7 +5,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Instala as dependências do sistema operacional
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl && apt-get install -y git
 
 # Copia o script wait-for-it.sh para o container
 COPY wait-for-it.sh /app/
