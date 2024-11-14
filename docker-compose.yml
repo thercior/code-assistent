@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  chatbot:
+  code_assistent:
     buid: .
-    container_name: chatbot
+    container_name: code_assistent
     ports:
       - "8051:8000"
     environment:
