@@ -30,9 +30,8 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG_DEV = os.getenv('DEBUG_DEV')
-DEBUG_PROD = os.getenv('DEBUG_PRODUCTION')
-DEBUG = DEBUG_DEV if DEBUG_DEV else DEBUG_PROD
+DEBUG_DEV = os.getenv('DEBUG_DEV', 'False').lower() == 'true'
+DEBUG = True if DEBUG_DEV else False
 
 ALLOWED_HOSTS = ['*']
 
@@ -87,12 +86,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'data/chatbotdb.sqlite3',
-    },
-}
 DATABASES = {
     'dev': {
         'ENGINE': 'django.db.backends.sqlite3',
