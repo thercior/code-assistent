@@ -1,17 +1,21 @@
-version: '3'
+version: '3.8'
 
 services:
   code_assistent:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: code_assistent
     ports:
       - "8051:8000"
     environment:
-      - DJANGO_SETTINGS_MODULE=code-assistent.settings
+      - DJANGO_SETTINGS_MODULE=config.settings
     volumes:
       - .:/app
       - static_volume:/app/static
       - media_volume:/app/media
+    depends_on:
+      - db
 
 volumes:
   static_volume:

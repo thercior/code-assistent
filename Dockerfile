@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Definir variáveis de ambiente
-ENV DJANGO_SETTINGS_MODULE=code-assistent.settings
+ENV DJANGO_SETTINGS_MODULE=config.settings
 
 # Executar os comandos Django necessários
 RUN python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput
