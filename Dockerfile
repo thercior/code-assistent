@@ -38,4 +38,4 @@ ENV DJANGO_SETTINGS_MODULE=config.settings \
 EXPOSE 8000
 
 # Comando para rodar servidor django
-CMD ["/code-assistent/wait-for-it.sh", "db_host:db_port", "--", "uwsgi", "--ini", "code-assistent_uwsgi.ini"]
+CMD ["uwsgi", "--ini", "code-assistent_uwsgi.ini"]
