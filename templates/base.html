@@ -11,26 +11,25 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         {% block styles %}{% endblock %}
     </head>
-    <body class="bg-gray-700 h-screen flex">
+    <body class="bg-gray-700 h-screen flex flex-col">
         
-        <div class="flex h-full w-full">
+        <div class="flex flex-1 w-full">
             {% if user.is_authenticated %}
                 {% include "components/_sidebar.html" %}
             {% endif %}
             
-            <div id="mainContent" class="flex-grow transition-all duration-300">
+            <div id="mainContent" class="flex-grow flex flex-col w-full min-h-screen transition-all duration-300">
                 {% include "components/_header.html" %}
                 
-                <main class="container mx-auto py-6 px-4">
+                <main class="flex-grow container mx-auto py-6 px-4">
                     {% block content %}
                 
                     {% endblock %}
                 </main>
-
+                {% include "components/_footer.html" %}
             </div>
+            
         </div>
-        
-        
         {% block scripts %}
             <script src="{% static 'js/toggleSidebar.js' %}"></script>
         {% endblock scripts %}
