@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: code-assistent
     ports:
-      - "8051:8000"
+      - "8052:8000"
     env_file: config/.env
     volumes:
       - static_volume:/code-assistent/staticfiles
