@@ -5,17 +5,35 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: code_assistent
+    container_name: code-assistent
     ports:
       - "8051:8000"
+    env_file: config/.env
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings
     volumes:
-      - .:/app
-      - static_volume:/app/static
-      - media_volume:/app/media
+      - static_volume:/code-assistent/staticfiles
+      - media_volume:/code-assistent/media
     depends_on:
-      - db
+      - setup
+
+  setup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: setup
+    entrypoint: >
+      sh -c "python manage.py makemigrations &&
+        python manage.py migrate &&
+        python manage.py collectstatic --noinput"
+    env_file: config/.env
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    volumes: 
+      - static_volume:/code-assistent/staticfiles
+      - media_volume:/code-assistent/media
+
 
 volumes:
   static_volume:
