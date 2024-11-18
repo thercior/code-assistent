@@ -138,10 +138,12 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, STATIC_URL)]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, STATIC_URL)]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# if DEBUG:
+#     STATICFILES_DIRS = [os.path.join(BASE_DIR, STATIC_URL)]
+# else:
+#     STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
 
 # Configurations of Media Files
 MEDIA_URL = '/media/'
