@@ -12,7 +12,7 @@ from clients.agent import CodeAssistantAI
 class ConversationListView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
-        conversations = request.user.conversations_chat.all()
+        conversations = request.user.conversations_chat.all().order_by('-created_at')
         return render(request, 'Chatbot/conversations_list.html', {'conversations': conversations})
 
 
@@ -32,7 +32,7 @@ class ChatBotView(LoginRequiredMixin, View):
     def get(self, request, conversation_id, *args, **kwargs):
         conversations = request.user.conversations_chat.all()
         conversation = get_object_or_404(ConversationChat, id=conversation_id, user=request.user)
-        chats = conversation.chats.all()
+        chats = conversation.chats.all().order_by('-created_at')
         return render(
             request,
             'Chatbot/chatbot.html',
@@ -48,7 +48,7 @@ class ChatBotView(LoginRequiredMixin, View):
         conversation = get_object_or_404(ConversationChat, id=conversation_id, user=request.user)
         message = request.POST.get('message')
 
-        chats = conversation.chats.all()
+        chats = conversation.chats.all().order_by('-created_at')
         context = self.code_assistant.get_chat_history(chats=chats)
 
         response = self.code_assistant.ask_ai(
