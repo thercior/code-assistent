@@ -61,3 +61,17 @@ function addMessageToChat(content, sender, align) {
     messagesList.appendChild(messageItem);
    scroollBotom();  // Scroll to the latest message
 }
+
+// AutoResize input chatbot
+messageInput.addEventListener('input', function () {
+    this.style.height = "auto";
+
+    const maxHeight = parseInt(window.getComputedStyle(this).maxHeight);
+
+    if (this.scrollHeight <= maxHeight) {
+        this.style.height = `${this.scrollHeight}px`;
+    } else {
+        this.style.height = `${maxHeight}px`;
+        this.style.overflowY = "auto"
+    }
+});
