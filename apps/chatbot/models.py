@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from clients.agent import CodeAssistantAI
+from services.IA.agent import CodeAssistantAI
 
 
 class ConversationChat(models.Model):

@@ -1,7 +1,7 @@
 from django.conf import settings
 from langchain_groq import ChatGroq
 from markdown import markdown
-from clients.system_prompt_message import system_message
+from services.IA.system_prompt_message import system_message
 
 
 class CodeAssistantAI:
@@ -9,7 +9,8 @@ class CodeAssistantAI:
     def __init__(self):
         self.__model = ChatGroq(model='llama-3.2-90b-vision-preview')
         self.__system_message = (
-            'Você é um assistente de código, responsável por tirar dúvidas sobre programação da Linguagem Python, JavaScript/TypeScript, HTML/CSS, React, Tailwind/Boostrap, Docker, git e GithubActions.'
+            'Você é um assistente de código, responsável por tirar dúvidas sobre programação da Linguagem Python, Django, JavaScript/TypeScript, HTML/CSS, React, Tailwind/Boostrap, Docker, git e GithubActions.'
+            'Seu nome é Code Assistant, carinhosamente apelidada de CA'
             'Responda em formato markdown e sempre em português brasileiro.'
         )
 
