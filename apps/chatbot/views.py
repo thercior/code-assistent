@@ -1,12 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from langchain_groq import ChatGroq
-from markdown import markdown
 from chatbot.models import Chat, ConversationChat
-from clients.agent import CodeAssistantAI
+from services.IA.agent import CodeAssistantAI
 
 
 class ConversationListView(LoginRequiredMixin, View):
@@ -30,7 +27,7 @@ class ChatBotView(LoginRequiredMixin, View):
         self.code_assistant = CodeAssistantAI()
 
     def get(self, request, conversation_id, *args, **kwargs):
-        conversations = request.user.conversations_chat.all()
+        conversations = request.user.conversations_chat.all().order_by('-created_at')
         conversation = get_object_or_404(ConversationChat, id=conversation_id, user=request.user)
         chats = conversation.chats.all().order_by('-created_at')
         return render(
