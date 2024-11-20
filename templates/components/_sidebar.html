@@ -1,33 +1,61 @@
-<div class="flex flex-col">
-    
-    <div id="sidebar" class="sidebar bg-gray-800 text-white w-64 transition-transform transform lg:flex-shrink-0 h-full flex flex-col">
+{% if '/chats/' in request.path %}
+    <div class="{% if request.path == '/chats/'%}lg:hidden{% endif %} flex flex-col h-full">
+        
+        <div id="sidebar" class="sidebar bg-gray-800 text-white w-64 transition-transform transform  lg:flex-shrink-0 h-full flex flex-col relative">
 
 
-        <div class="conversations mt-2 overflow-y-auto">
-            <h3 class="p-2 my-2 font-bold text-gray-400 flex items-center">
-                <a href="{% url 'Accounts:update_profile' request.user.id %}" class="my-3">
-                    <i class="fa fa-user ml-2"></i>
-                    {{ request.user.first_name }} {{ request.user.last_name }}
-                </a>
-            </h3>
-            <hr>
-            <div class="mt-5">
-                <h2 class="text-xl text-blue-800 font-semibold text-justify ml-2">
-                    Aqui estão seus chats:
-                </h2>
-                <ul>
-                    {% for conversation in conversations %}
-                        <li class="conversation-item {% if conversation.id == conversation_selected %} bg-gray-600 {% else %} hover:bg-gray-700 {% endif %} p-4 cursor-pointer transition">
-                            <a href="{% url 'Chatbot:chat_view' conversation.id %}" class="flex justify-start">
-                                <div class="text-sm font-medium">
-                                    {{ conversation.title|safe }}
-                                </div>
-                            </a>
-                        </li>
-                    {% endfor %}
-                    
-                </ul>
+            <div class="conversations mt-2 overflow-y-auto flex-grow">
+                <h3 class="p-2 my-2 font-bold text-gray-400 flex items-center">
+                    <a href="{% url 'Accounts:update_profile' request.user.id %}" class="my-3">
+                        <i class="fa fa-user ml-2"></i>
+                        {{ request.user.first_name }} {{ request.user.last_name }}
+                    </a>
+                </h3>
+                <hr>
+                <div class="mt-5">
+                    <h2 class="text-xl text-blue-800 font-semibold text-justify ml-2">
+                        Aqui estão seus chats:
+                    </h2>
+                    <ul>
+                        {% for conversation in conversations %}
+                            <li class="conversation-item {% if conversation.id == conversation_selected %} bg-gray-600 {% else %} hover:bg-gray-700 {% endif %} p-4 cursor-pointer transition">
+                                <a href="{% url 'Chatbot:chat_view' conversation.id %}" class="flex justify-start">
+                                    <div class="text-sm font-medium">
+                                        {{ conversation.title|safe }}
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        
+                    </ul>
+                </div>
             </div>
+
+            <div id="mobileNavbar" class="lg:hidden p-4 bg-gray-800 sticky bottom-0 mt-4">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'Chatbot:conversation_list' %}" class="text-white font-extrabold hover:bg-blue-700 my-5 px-4 py2 rounded-lg transition block">
+                        Chats
+                    </a>
+                    <form action="{% url 'Accounts:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="flex items-center text-white bg-red-600 hover:bg-red-700 my-4 px-4 py-2 rounded-lg transition w-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h10a1 1 0 011 1v4a1 1 0 11-2 0V5H5v10h8v-3a1 1 0 112 0v4a1 1 0 01-1 1H4a1 1 0 01-1-1V4z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M12.293 9.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L14.586 13H9a1 1 0 110-2h5.586l-1.293-1.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                            Sair
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'Accounts:login' %}" class="text-white font-bold bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition block">
+                        <i class="fa-solid fa-right-to-bracket text-white font-bold pr-2"></i>
+                        Entrar
+                    </a>
+                {% endif %}
+            </div>
+
         </div>
     </div>
-</div>
+
+
+{% endif %}

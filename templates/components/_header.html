@@ -1,11 +1,13 @@
 {% load static %}
 <header class="w-full flex flex-row bg-gray-800 p-2">
     <div class="flex mx-2">
-        <button id="toggleSidebar" class="pl-2 py-6 items-center justify-center text-gray-200 bg-gray-800 focus:outline-none">
-            <svg class="h-6 w-6 items-center justify-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
-            </svg>
-        </button>
+        {% if '/chats/' in request.path %}
+            <button id="toggleSidebar" class="{% if request.path == '/chats/' %}lg:hidden{% endif %} pl-2 py-6 items-center justify-center text-gray-200 bg-gray-800 focus:outline-none">
+                <svg class="h-6 w-6 items-center justify-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+                </svg>
+            </button>
+        {% endif %}
     </div>
     <div class="container mx-auto flex justify-between items-center">
 
