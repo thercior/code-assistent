@@ -2,12 +2,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const sidebar = document.getElementById("sidebar");
     const toggleSidebar = document.getElementById("toggleSidebar");
     const mainContent = document.getElementById("mainContent");
+    const navbarContent = document.getElementById("navbarContent");
+    const mobileNavbar = document.getElementById("mobileNavbar");
 
-    console.log("Script carregado");
     toggleSidebar.addEventListener("click", () => {
-        console.log("Botão clicado");
         sidebar.classList.toggle("-translate-x-full");
         mainContent.classList.toggle("-ml-64");
-        console.log("Classes da sidebar:", sidebar.classList);
+        mobileNavbar.classList.toggle("hidden");
     });
+
 });
