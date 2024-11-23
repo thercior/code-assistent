@@ -8,3 +8,27 @@
         margin: 0 auto;
     }
 }
+
+@media(max-width:800px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 40;
+        transform: translateX(-100%);
+        margin-top: 3.5rem;
+    }
+
+    #mobileNavbar {
+        margin-bottom: 3.5em;;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    #main-content {
+        margin-left: 0;
+    }
+}
