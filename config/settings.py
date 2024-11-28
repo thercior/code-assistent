@@ -165,6 +165,7 @@ MESSAGE_TAGS = {
 
 # Variables extras imported
 GROQ_API_KEY = os.getenv('GROQ_API_KEY')
+NOTIFY_URL = os.getenv('NOTIFY_URL')
 
 LOGIN_REDIRECT_URL = 'Chatbot:conversation_list'
 LOGOUT_REDIRECT_URL = 'Accounts:login'
