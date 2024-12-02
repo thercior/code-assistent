@@ -12,6 +12,9 @@ Atualmente a aplicação encontra-se na versão 1.0, e oferece com recursos:
 * Chats de conversa com o IA.
 * Agrupamento das conversas dos chats, podendo você dividir os chats por assuntos ou outra particularidade.
 * Cada usuário só tem acesso ao seus grupos e chats de conversas. Acesso somente por login de user cadastrado.
+* Formulário para alteração de senha de usuário e alteração de dados do usuário.
+* Formulário para reset de senha, caso o usuário tenha esquecido, com envio automático de e-mail com link de código de uso único e tempo de expiração de uso.
+* Integração com sistema de webhook para envio de e-mails e notificações em caso de ocorrência de eventos específicos.
 
 ## 🧱 Stack utilizada
 
